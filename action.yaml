@@ -1,12 +1,36 @@
 name: 'Firebase Build & Deploy'
 description: 'Firebase Build & Deploy'
 inputs:
-  FIREBASE_SERVICE_ACCOUNT:  # id of input
+  repoToken:  # id of input
+    description: 'GitHub Repo Token'
+    required: true
+    default: ''
+  firebaseProjectId:  # id of input
+    description: 'Firebase projectId'
+    required: true
+    default: ''
+  firebaseServiceAccount:  # id of input
     description: 'Firebase service account'
     required: true
     default: ''
-  FIREBASE_PROJECT_ID:  # id of input
-    description: 'Firebase projectId'
+  firebaseChannelId:  # id of input
+    description: 'Firebase channelId'
+    required: true
+    default: ''
+  fontawesomeNpmRegistryToken:  # id of input
+    description: 'FontAwesome pro npm registry token'
+    required: true
+    default: ''
+  gfzmNpmRegistryToken:  # id of input
+    description: 'GFZM pro npm registry token'
+    required: true
+    default: ''
+  beyondAgenturNpmRegistryToken:  # id of input
+    description: 'beyondAgentur pro npm registry token'
+    required: true
+    default: ''
+  theme:  # id of input
+    description: 'hugo theme to build'
     required: true
     default: ''
 runs:
@@ -38,11 +62,11 @@ runs:
     - name: Set Registries
       run: |
         npm config set "@fortawesome:registry" https://npm.fontawesome.com
-        npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FORTAWESOME_NPM_REGISTRY }}
+        npm config set "//npm.fontawesome.com/:_authToken" ${{ inputs.fontawesomeNpmRegistryToken }}
         npm config set "@gfzm:registry" https://npm.gfzm.de/registry/
-        npm config set "//npm.gfzm.de/registry/:_authToken" {{ secrets.GFZM_NPM_REGISTRY }}
+        npm config set "//npm.gfzm.de/registry/:_authToken" ${{ inputs.gfzmNpmRegistryToken }}
         npm config set "@beyond-agentur:registry" https://npm.beyond-agentur.com/registry/
-        npm config set "//npm.beyond-agentur.com/registry/:_authToken" {{ secrets.BEYOND_AGENTUR_NPM_REGISTRY }}
+        npm config set "//npm.beyond-agentur.com/registry/:_authToken" ${{ inputs.beyondAgenturNpmRegistryToken }}
 
     - name: Install Dependencies
       run: npm install
@@ -52,7 +76,7 @@ runs:
       run: npm install
 
     - name: Install theme dsb Dependencies
-      working-directory: themes/dsb
+      working-directory: themes/${{ inputs.theme }}
       run: npm install
 
     - name: Build
@@ -64,9 +88,9 @@ runs:
     - name: Deploy to firebase
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
-        repoToken: '${{ secrets.GITHUB_TOKEN }}'
-        firebaseServiceAccount: '${{ inputs.FIREBASE_SERVICE_ACCOUNT }}'
-        channelId: live
-        projectId: ${{ inputs.FIREBASE_PROJECT_ID }}
+        repoToken: '${{ inputs.repoToken }}'
+        firebaseServiceAccount: '${{ inputs.firebaseServiceAccount }}'
+        channelId: ${{ inputs.firebaseChannelId }}
+        projectId: ${{ inputs.firebaseProjectId }}
       env:
         FIREBASE_CLI_PREVIEWS: hostingchannels
