@@ -120,7 +120,7 @@ gulp.task( "critical", function () {
                 base:       config.build.target,
                 inline:     true,
                 minify:     false,
-                css:        [ path.join( config.build.target, "styles/style.css" ) ],
+                css:        [ path.join( config.build.target, "styles", "styles.min.css" ) ],
                 dimensions: [ {
                     height: 498,
                     width:  280
