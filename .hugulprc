@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "pipeline": [
+    "images",
+    "styles",
+    "scripts",
+    "fingerprint",
+    "html",
+    "critical"
+  ],
+  "path": {
+    "styles": "styles",
+    "images": "images",
+    "img": "img",
+    "scripts": "js"
+  },
+  "watch": {
+    "source": "assets",
+    "target": "themes/dsb/static"
+  },
+  "build": {
+    "source": "public",
+    "target": "dist"
+  },
+  "autoprefixer": {
+    "browsers": [
+      "last 2 versions"
+    ]
+  },
+  "cleancss": {
+    "advanced": true,
+    "level": {
+      "1": {
+        "specialComments": false
+      }
+    }
+  },
+  "autoprefixer": {
+    "browsers": [
+      "last 2 versions"
+    ]
+  },
+  "htmlmin": {
+    "collapseWhitespace": true
+  },
+  "gifsicle": {
+    "interlaced": true
+  },
+  "jpegtran": {
+    "progressive": true
+  },
+  "optipng": {
+    "optimizationLevel": 5
+  },
+  "svgo": {
+    "plugins": [
+      {
+        "removeViewBox": true
+      },
+      {
+        "cleanupIDs": false
+      }
+    ]
+  }
+}
