@@ -53,7 +53,7 @@
     "pump": "^3.0.0"
   },
   "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.1.13",
+    "@googlemaps/google-maps-services-js": "^3.4.2",
     "bluebird": "^3.7.2",
     "bootstrap": "^4.5.3",
     "htmltidy": "^0.0.6",
